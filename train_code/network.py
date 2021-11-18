@@ -27,7 +27,7 @@ def resblock(inputs, out_channel=32, name='resblock'):
         
 
 
-def generator(inputs, channel=32, num_blocks=4, name='generator', reuse=False):
+def generator(inputs, channel=32, num_blocks=4, name='generator', reuse=True):
     with tf.variable_scope(name, reuse=reuse):
         
         x = slim.convolution2d(inputs, channel, [7, 7], activation_fn=None)
@@ -59,7 +59,7 @@ def generator(inputs, channel=32, num_blocks=4, name='generator', reuse=False):
         return x
     
 
-def unet_generator(inputs, channel=32, num_blocks=4, name='generator', reuse=False):
+def unet_generator(inputs, channel=32, num_blocks=4, name='generator', reuse=True):
     with tf.variable_scope(name, reuse=reuse):
         
         x0 = slim.convolution2d(inputs, channel, [7, 7], activation_fn=None)
@@ -146,7 +146,7 @@ def disc_sn(x, scale=1, channel=32, patch=True, name='discriminator', reuse=Fals
         return x
 
 
-def disc_ln(x, channel=32, is_training=True, name='discriminator', patch=True, reuse=False):
+def disc_ln(x, channel=32, is_training=True, name='discriminator', patch=True, reuse=True):
     with tf.variable_scope(name, reuse=reuse):
 
         for idx in range(3):
