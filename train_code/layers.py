@@ -63,7 +63,7 @@ def conv_spectral_norm(x, channel, k_size, stride=1, name='conv_snorm'):
 
 
 
-def self_attention(inputs, name='attention', reuse=False):
+def self_attention(inputs, name='attention', reuse=tf.AUTO_REUSE):
     with tf.variable_scope(name, reuse=reuse):
         h, w = tf.shape(inputs)[1], tf.shape(inputs)[2]
         bs, _, _, ch = inputs.get_shape().as_list()
