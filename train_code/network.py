@@ -27,7 +27,7 @@ def resblock(inputs, out_channel=32, name='resblock'):
         
 
 
-def generator(inputs, channel=32, num_blocks=4, name='generator', reuse=True):
+def generator(inputs, channel=32, num_blocks=4, name='generator', reuse=tf.AUTO_REUSE):
     with tf.variable_scope(name, reuse=reuse):
         
         x = slim.convolution2d(inputs, channel, [7, 7], activation_fn=None)
@@ -59,7 +59,7 @@ def generator(inputs, channel=32, num_blocks=4, name='generator', reuse=True):
         return x
     
 
-def unet_generator(inputs, channel=32, num_blocks=4, name='generator', reuse=True):
+def unet_generator(inputs, channel=32, num_blocks=4, name='generator', reuse=tf.AUTO_REUSE):
     with tf.variable_scope(name, reuse=reuse):
         
         x0 = slim.convolution2d(inputs, channel, [7, 7], activation_fn=None)
@@ -99,7 +99,7 @@ def unet_generator(inputs, channel=32, num_blocks=4, name='generator', reuse=Tru
     
     
 def disc_bn(x, scale=1, channel=32, is_training=True, 
-            name='discriminator', patch=True, reuse=False):
+            name='discriminator', patch=True, reuse=tf.AUTO_REUSE):
     
     with tf.variable_scope(name, reuse=reuse):
         
@@ -123,7 +123,7 @@ def disc_bn(x, scale=1, channel=32, is_training=True,
     
 
 
-def disc_sn(x, scale=1, channel=32, patch=True, name='discriminator', reuse=False):
+def disc_sn(x, scale=1, channel=32, patch=True, name='discriminator', reuse=tf.AUTO_REUSE):
     with tf.variable_scope(name, reuse=reuse):
 
         for idx in range(3):
